@@ -4,7 +4,7 @@ lxml
 torch==1.7.1
 torchvision==0.8.2
 scipy
-pycocotools
+pycocotools-windows
 matplotlib
 tqdm
 tensorboard==2.1.0
