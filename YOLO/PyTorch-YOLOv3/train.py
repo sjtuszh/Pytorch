@@ -92,6 +92,7 @@ def run():
     valid_path = data_config["valid"]
     class_names = load_classes(data_config["names"])
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(device)
 
     # ############
     # Create model
@@ -103,8 +104,8 @@ def run():
     if args.verbose:
         summary(model, input_size=(3, model.hyperparams['height'], model.hyperparams['height']))
 
-    # mini_batch_size = model.hyperparams['batch'] // model.hyperparams['subdivisions']
-    mini_batch_size = 32
+    mini_batch_size = model.hyperparams['batch'] // model.hyperparams['subdivisions']
+    # mini_batch_size = 32
 
     # #################
     # Create Dataloader
