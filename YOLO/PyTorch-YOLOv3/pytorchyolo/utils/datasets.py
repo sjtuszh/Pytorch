@@ -1,3 +1,4 @@
+
 from torch.utils.data import Dataset
 import torch.nn.functional as F
 import torch
@@ -8,6 +9,7 @@ import warnings
 import numpy as np
 from PIL import Image
 from PIL import ImageFile
+from torchvision import transforms
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
@@ -86,8 +88,14 @@ class ListDataset(Dataset):
         try:
 
             img_path = self.img_files[index % len(self.img_files)].rstrip()
+            # 绝对路径才打得开图片
+            img_path = 'E:\\Student-SZH\\Pytorch\\YOLO\\PyTorch-YOLOv3\\data\\coco'+img_path
 
             img = np.array(Image.open(img_path).convert('RGB'), dtype=np.uint8)
+            # img = transforms.toTensor()(Image.open(img_path).convert('RGB'))
+            # img = torch.from_numpy(np.array(Image.open(img_path).convert('RGB'), dtype=np.uint8))
+
+
         except Exception:
             print(f"Could not read image '{img_path}'.")
             return
@@ -97,7 +105,7 @@ class ListDataset(Dataset):
         # ---------
         try:
             label_path = self.label_files[index % len(self.img_files)].rstrip()
-
+            label_path = 'E:/Student-SZH/Pytorch/YOLO/PyTorch-YOLOv3/data/coco'+label_path
             # Ignore warning if file is empty
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
