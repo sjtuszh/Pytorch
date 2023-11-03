@@ -105,7 +105,7 @@ def run():
         summary(model, input_size=(3, model.hyperparams['height'], model.hyperparams['height']))
 
     mini_batch_size = model.hyperparams['batch'] // model.hyperparams['subdivisions']
-    # mini_batch_size = 32
+    # mini_batch_size =
 
     # #################
     # Create Dataloader

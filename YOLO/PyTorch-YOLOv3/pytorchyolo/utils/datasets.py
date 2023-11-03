@@ -69,6 +69,9 @@ class ListDataset(Dataset):
             assert label_dir != image_dir, \
                 f"Image path must contain a folder named 'images'! \n'{image_dir}'"
             label_file = os.path.join(label_dir, os.path.basename(path))
+
+            label_file = label_file.replace("/", "\\")
+
             label_file = os.path.splitext(label_file)[0] + '.txt'
             self.label_files.append(label_file)
 
@@ -105,7 +108,7 @@ class ListDataset(Dataset):
         # ---------
         try:
             label_path = self.label_files[index % len(self.img_files)].rstrip()
-            label_path = 'E:/Student-SZH/Pytorch/YOLO/PyTorch-YOLOv3/data/coco'+label_path
+            label_path = 'E:\\Student-SZH\\Pytorch\\YOLO\\PyTorch-YOLOv3\\data\\coco'+label_path
             # Ignore warning if file is empty
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
@@ -113,6 +116,9 @@ class ListDataset(Dataset):
         except Exception:
             print(f"Could not read label '{label_path}'.")
             return
+        # label_path = self.label_files[index % len(self.img_files)].rstrip()
+        # label_path = 'E:\\Student-SZH\\Pytorch\\YOLO\\PyTorch-YOLOv3\\data\\coco' + label_path
+        # boxes = np.loadtxt(label_path).reshape(-1, 5)
 
         # -----------
         #  Transform
